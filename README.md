@@ -12,7 +12,7 @@
     <a href="https://longcat.chat/longcat-next/intro" target="_blank" style="margin: 2px;">
         <img alt="Blog" src="https://img.shields.io/badge/Blog-LongCatNext-white?logo=safari&logoColor=white&color=purple" style="display: inline-block; vertical-align: middle;"/>
     </a>
-    <a href="https://huggingface.co/meituan-longcat" target="_blank" style="margin: 2px;">
+    <a href="https://huggingface.co/meituan-longcat/LongCat-Next" target="_blank" style="margin: 2px;">
         <img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-LongCatNext-ffc107?color=ffc107&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
     </a>
     <a href="https://github.com/meituan-longcat/LongCat-Next" target="_blank" style="margin: 2px;">
@@ -50,7 +50,7 @@
 
 ## Model Introduction
 
-![evaluation](./assets/overview.png)
+![evaluation](./assets/overview.jpg)
 
 
 We develop **LongCat-Next**, a native multimodal model that processes text, vision, and audio under a single autoregressive objective with minimal inductive bias beyond the language paradigm. As an industrial-strength foundation model with A3B model size, it excels at seeing, creating, and talking, achieving strong performance across a wide range of multimodal benchmarks. In particular, leveraging semantically complete discrete representations, it surpasses the long-standing performance ceiling of discrete vision modeling on understanding tasks, and provides a unified solution for visual understanding and generation. This success demonstrates that discrete tokens can universally represent multimodal signals and be deeply internalized within a single discrete embedding space. We further provide extensive experiments to analyze this unified discrete training paradigm and uncover several interesting findings.
@@ -259,9 +259,10 @@ messages = [
 
 ```python
 # Simply replace the messages in the main example with the messages below.
+# Suffix user content with '<longcat_img_start>' to force image generation.
 messages = [
     {"role": "system", "content": ""},
-    {"role": "user", "content": "A small kitten sitting naturally on a moss-covered forest floor, centered in the frame, holding a rectangular wooden sign gently with its front paws resting over the top edge. The kitten has soft, fluffy fur, a natural relaxed posture, and a calm, curious expression with a slightly open mouth (not exaggerated), looking directly at the camera.\n\nThe sign is positioned firmly in front of the kitten\'s chest, supported by its paws, with realistic contact and no floating effect. The board reads \"LongCat-Next: When Modalities Internalize as Multilingual Tokens\" in clean, sharp black text, perfectly legible.\n\nThe environment is a lush forest with tall trees, ferns, and soft green foliage. The ground is covered with moss and small plants. Background softly blurred with natural depth of field. Lighting is soft, diffused sunlight filtering through the trees, creating gentle highlights and shadows. Realistic photography style, natural colors, high detail, no cartoonish exaggeration.<longcat_img_start>"}
+    {"role": "user", "content": "A small kitten sitting naturally on a moss-covered forest floor, centered in the frame, holding a rectangular wooden sign gently with its front paws resting over the top edge. The kitten has soft, fluffy fur, a natural relaxed posture, and a calm, curious expression with a slightly open mouth (not exaggerated), looking directly at the camera.\n\nThe sign is positioned firmly in front of the kitten\'s chest, supported by its paws, with realistic contact and no floating effect. The board reads \"LongCat-Next: Lexicalizing Modalities as Discrete Tokens\" in clean, sharp black text, perfectly legible.\n\nThe environment is a lush forest with tall trees, ferns, and soft green foliage. The ground is covered with moss and small plants. Background softly blurred with natural depth of field. Lighting is soft, diffused sunlight filtering through the trees, creating gentle highlights and shadows. Realistic photography style, natural colors, high detail, no cartoonish exaggeration.<longcat_img_start>"}
 ]
 ```
 
@@ -286,6 +287,7 @@ messages = [
 
 ```python
 # Simply replace the messages in the main example with the messages below.
+# Suffix user content with '<longcat_audiogen_start>' to force audio generation.
 messages = [
     {"role": "system", "content": "Replicate the voice in the audio clip to formulate an answer:<longcat_audio_start>./assets/system_audio.wav<longcat_audio_end>"},
     {"role": "user", "content": "<longcat_audio_start>./assets/math1.wav<longcat_audio_end><longcat_audiogen_start>"}
@@ -299,6 +301,7 @@ messages = [
 
 ```python
 # Simply replace the messages in the main example with the messages below.
+# Suffix user content with '<longcat_audiogen_start>' to force audio generation.
 messages = [
     {"role": "system", "content": "Replicate the voice in the audio clip to formulate an answer:<longcat_audio_start>./assets/vc_zh3.wav<longcat_audio_end>"},
     {"role": "user", "content": "用这个声音合成以下内容：明天的meeting在三楼的Conference Room举行。<longcat_audiogen_start>"}
@@ -324,30 +327,8 @@ messages = [
 
 ## Deployment
 
-We have implemented basic adaptations in SGLang(Code is being uploaded) to support the deployment of LongCat-Next.
+We have implemented basic adaptations in SGLang to support the deployment of LongCat-Next. Please refer to this repository for more information: [meituan-longcat/LongCat-Next-inference](https://github.com/meituan-longcat/LongCat-Next-inference)
 
-```shell
-git clone [TBU]
-cd nmm_infer
-git checkout master
-sh setup.sh
-```
-
-```shell
-# Require CUDA >= 12.9
-
-# Setup environment
-source create_env.sh
-source set_env.sh
-
-# Run tests
-python3 demo.py \
-    --model-path meituan-longcat/LongCat-Next \
-    --sequential \
-    --output-dir output \
-    --tasks vis_gen vis_und aud_qa spk_syn
-    
-```
 
 
 ## License Agreement
