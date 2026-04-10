@@ -24,6 +24,9 @@
 </div>
 
 <div align="center" style="line-height: 1;">
+    <a href="https://arxiv.org/abs/2603.27538" target="_blank" style="margin: 2px;">
+        <img alt="Paper" src="https://img.shields.io/badge/arXiv-2603.27538-b31b1b?logo=arxiv&logoColor=b31b1b" style="display: inline-block; vertical-align: middle;"/>  
+    </a>
   <a href="https://github.com/meituan-longcat/LongCat-Flash-Chat/blob/main/figures/wechat_official_accounts.png" target="_blank" style="margin: 2px;">
     <img alt="Wechat" src="https://img.shields.io/badge/WeChat-LongCat-brightgreen?logo=wechat&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
   </a>
